@@ -1,5 +1,7 @@
 package winter.mongodb;
 
+import java.util.Arrays;
+
 // import java.util.Arrays;
 // import java.util.List;
 
@@ -19,12 +21,12 @@ public class createconnection {
 
             // lets create collection
             MongoCollection<Document> collection = database.getCollection("class");
-            if(collection == null){
-                database.createCollection("class");
-                System.out.println("Collection created successfully");
-            }else{
-                System.out.println("Collection already exists");
-            }
+            // if(collection == null){
+            //     database.createCollection("class");
+            //     System.out.println("Collection created successfully");
+            // }else{
+            //     System.out.println("Collection already exists");
+            // }
 
             // Document document1 = new Document("name","Shreya").append("marks", 80).append("age",21).append("location", "patna");
         //     List<Document> documents = Arrays.asList(new Document("name", "Khushi").append("marks", 80).append("age", 21).append("location", "Patna"),
@@ -53,7 +55,12 @@ public class createconnection {
             //     System.out.println("No document found for shreya");
             // }
 
-            
+            // Document find_gt = new Document("age",new Document("$gt",21 ));
+            // collection.find(find_gt).forEach(document -> System.out.println(document));
+
+            // Document find_in = new Document("name",new Document("$in",Arrays.asList("Madhav","Shreya")));
+            Document find_and = new Document("$and",Arrays.asList(new Document("name","Madhav"),new Document("location","patna")));
+            collection.find(find_and).forEach(document ->System.out.println(document));
 
         }catch(Exception e){
             e.printStackTrace();
